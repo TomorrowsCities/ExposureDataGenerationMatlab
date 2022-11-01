@@ -11,10 +11,19 @@
 clear; clc;
 
 %% Input File Folder 
-input_file_folder = 'C:\Kandilli Projects\tomorrow_cities\RandomAssignments\Codes\';
+input_file_folder = pwd;
 
 % Read Landuse File
-TV0_data_landuse = readtable( [ input_file_folder 'polygonsTV50.dbf'], "FileType","spreadsheet");
+[dummyCell, dummyNames] = dbfread( '/Users/Roberto/Desktop/LandUsePlan_FG_E.dbf');
+TV0_data_landuse = cell2table(dummyCell);
+TV0_data_landuse.Properties.VariableNames = dummyNames;
+
+% fix missing zoneIDs
+lastZoneID = max(unique(TV0_data_landuse.zoneID));
+TV0_data_landuse.zoneID(isnan(TV0_data_landuse.zoneID)) = ...
+    lastZoneID+1 : lastZoneID + sum(isnan(TV0_data_landuse.zoneID));
+
+
 % TV0_data_landuse2 = readtable( [ input_file_folder2 'LANDUSE_S0\LANDUSE_S0.dbf'], "FileType","spreadsheet");
 
 % Preprocessing on land use data
