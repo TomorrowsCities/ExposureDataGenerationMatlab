@@ -1,0 +1,353 @@
+clc
+i
+
+i =
+
+     1
+
+wp2_final_v2
+there are no populations in the zone id: 22
+there are no populations in the zone id: 39
+there are no populations in the zone id: 31
+there are no populations in the zone id: 27
+there are no populations in the zone id: 28
+there are no populations in the zone id: 29
+there are no populations in the zone id: 44
+there are no populations in the zone id: 43
+there are no populations in the zone id: 41
+there are no populations in the zone id: 42
+there are no populations in the zone id: 30
+there are no populations in the zone id: 46
+there are no populations in the zone id: 40
+there are no populations in the zone id: 45
+there are no populations in the zone id: 9
+there are no populations in the zone id: 8
+there are no populations in the zone id: 10
+there are no populations in the zone id: 14
+there are no populations in the zone id: 13
+there are no populations in the zone id: 2
+there are no populations in the zone id: 15
+there are no populations in the zone id: 1
+there are no populations in the zone id: 16
+there are no populations in the zone id: 17
+there are no populations in the zone id: 12
+there are no populations in the zone id: 11
+there are no populations in the zone id: 3
+there are no populations in the zone id: 4
+there are no populations in the zone id: 5
+there are no populations in the zone id: 6
+there are no populations in the zone id: 7
+there are no populations in the zone id: 47
+there are no populations in the zone id: 48
+there are no populations in the zone id: 49
+there are no populations in the zone id: 18
+there are no populations in the zone id: 19
+there are no populations in the zone id: 20
+there are no populations in the zone id: 21
+there are no populations in the zone id: 24
+there are no populations in the zone id: 50
+there are no populations in the zone id: 52
+there are no populations in the zone id: 53
+there are no populations in the zone id: 54
+there are no populations in the zone id: 55
+if system_dependent('IsDebugMode')==1, dbcont; end
+{Unable to perform assignment because the left and right sides have a different number of elements.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('wp2_final_v2', '/Users/Roberto/Desktop/DataProductionMatlab/Goktekin/wp2_final_v2.m', 389)" style="font-weight:bold">wp2_final_v2</a> (<a href="matlab: opentoline('/Users/Roberto/Desktop/DataProductionMatlab/Goktekin/wp2_final_v2.m',389,0)">line 389</a>)
+    income_type (i) = TV0_data_household([TV0_data_household(:).hhID].'== temp_hhid).income_numb; % income type of household
+} 
+clc
+TV0_data_household([TV0_data_household(:).hhID].'== temp_hhid).income_numb
+
+ans =
+
+     []
+
+TV0_data_individual(hh_id_index)
+
+ans = 
+
+  9×1 <a href="matlab:helpPopup struct" style="font-weight:bold">struct</a> array with fields:
+
+    hhID
+    indivId
+    gender
+    age
+    eduAttStat
+    head
+
+length(avg_income_types)
+
+ans =
+
+     4
+
+if system_dependent('IsDebugMode')==1, dbquit; end
+avg_income_types = avg_income_types';
+avg_income_types
+
+avg_income_types =
+
+  1×4 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'highIncome'}    {'lowIncomeA'}    {'lowIncomeB'}    {'midIncome'}
+
+wp2_final_v2
+there are no populations in the zone id: 22
+there are no populations in the zone id: 39
+there are no populations in the zone id: 31
+there are no populations in the zone id: 27
+there are no populations in the zone id: 28
+there are no populations in the zone id: 29
+there are no populations in the zone id: 44
+there are no populations in the zone id: 43
+there are no populations in the zone id: 41
+there are no populations in the zone id: 42
+there are no populations in the zone id: 30
+there are no populations in the zone id: 46
+there are no populations in the zone id: 40
+there are no populations in the zone id: 45
+there are no populations in the zone id: 9
+there are no populations in the zone id: 8
+there are no populations in the zone id: 10
+there are no populations in the zone id: 14
+there are no populations in the zone id: 13
+there are no populations in the zone id: 2
+there are no populations in the zone id: 15
+there are no populations in the zone id: 1
+there are no populations in the zone id: 16
+there are no populations in the zone id: 17
+there are no populations in the zone id: 12
+there are no populations in the zone id: 11
+there are no populations in the zone id: 3
+there are no populations in the zone id: 4
+there are no populations in the zone id: 5
+there are no populations in the zone id: 6
+there are no populations in the zone id: 7
+there are no populations in the zone id: 47
+there are no populations in the zone id: 48
+there are no populations in the zone id: 49
+there are no populations in the zone id: 18
+there are no populations in the zone id: 19
+there are no populations in the zone id: 20
+there are no populations in the zone id: 21
+there are no populations in the zone id: 24
+there are no populations in the zone id: 50
+there are no populations in the zone id: 52
+there are no populations in the zone id: 53
+there are no populations in the zone id: 54
+there are no populations in the zone id: 55
+{Unable to perform assignment because the left and right sides have a different number of elements.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('wp2_final_v2', '/Users/Roberto/Desktop/DataProductionMatlab/Goktekin/wp2_final_v2.m', 392)" style="font-weight:bold">wp2_final_v2</a> (<a href="matlab: opentoline('/Users/Roberto/Desktop/DataProductionMatlab/Goktekin/wp2_final_v2.m',392,0)">line 392</a>)
+    income_type (i) = TV0_data_household([TV0_data_household(:).hhID].'== temp_hhid).income_numb; % income type of household
+} 
+if system_dependent('IsDebugMode')==1, dbquit; end
+clear
+clc
+wp2_final_v2
+there are no populations in the zone id: 22
+there are no populations in the zone id: 39
+there are no populations in the zone id: 31
+there are no populations in the zone id: 27
+there are no populations in the zone id: 28
+there are no populations in the zone id: 29
+there are no populations in the zone id: 44
+there are no populations in the zone id: 43
+there are no populations in the zone id: 41
+there are no populations in the zone id: 42
+there are no populations in the zone id: 30
+there are no populations in the zone id: 46
+there are no populations in the zone id: 40
+there are no populations in the zone id: 45
+there are no populations in the zone id: 9
+there are no populations in the zone id: 8
+there are no populations in the zone id: 10
+there are no populations in the zone id: 14
+there are no populations in the zone id: 13
+there are no populations in the zone id: 2
+there are no populations in the zone id: 15
+there are no populations in the zone id: 1
+there are no populations in the zone id: 16
+there are no populations in the zone id: 17
+there are no populations in the zone id: 12
+there are no populations in the zone id: 11
+there are no populations in the zone id: 3
+there are no populations in the zone id: 4
+there are no populations in the zone id: 5
+there are no populations in the zone id: 6
+there are no populations in the zone id: 7
+there are no populations in the zone id: 47
+there are no populations in the zone id: 48
+there are no populations in the zone id: 49
+there are no populations in the zone id: 18
+there are no populations in the zone id: 19
+there are no populations in the zone id: 20
+there are no populations in the zone id: 21
+there are no populations in the zone id: 24
+there are no populations in the zone id: 50
+there are no populations in the zone id: 52
+there are no populations in the zone id: 53
+there are no populations in the zone id: 54
+there are no populations in the zone id: 55
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+clc
+dist_table2{i}
+
+ans =
+
+    0.6000    0.3000    0.1000         0
+
+avg_income_types
+
+avg_income_types =
+
+  1×4 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'highIncome'}    {'lowIncomeA'}    {'lowIncomeB'}    {'midIncome'}
+
+avg_income_types{i}
+
+ans =
+
+    'highIncome'
+
+if system_dependent('IsDebugMode')==1, dbquit; end
+dist_table2{i}
+
+ans =
+
+    0.6000    0.3000    0.1000         0
+
+dist_avgIncome(avg_income_types{}i)
+ dist_avgIncome(avg_income_types{}i)
+                                 ↑
+{Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise, check for mismatched
+delimiters.
+} 
+dist_avgIncome(avg_income_types{i})
+{Unrecognized function or variable 'dist_avgIncome'.
+} 
+% % Households  LIA   LIB  MI   HI
+dist_avgIncome.lowIncomeA  = [0.60 0.30 0.10 0   ];
+dist_avgIncome.lowIncomeB  = [0.35 0.50 0.15 0   ];
+dist_avgIncome.midIncome   = [0.05 0.10 0.80 0.05];
+dist_avgIncome.highIncome  = [0    0    0.15 0.85];
+dist_avgIncome(avg_income_types{i})
+{Index exceeds the number of array elements. Index must not exceed 1.
+} 
+dist_avgIncome.(avg_income_types{i})
+
+ans =
+
+         0         0    0.1500    0.8500
+
+wp2_final_v2
+there are no populations in the zone id: 22
+there are no populations in the zone id: 39
+there are no populations in the zone id: 31
+there are no populations in the zone id: 27
+there are no populations in the zone id: 28
+there are no populations in the zone id: 29
+there are no populations in the zone id: 44
+there are no populations in the zone id: 43
+there are no populations in the zone id: 41
+there are no populations in the zone id: 42
+there are no populations in the zone id: 30
+there are no populations in the zone id: 46
+there are no populations in the zone id: 40
+there are no populations in the zone id: 45
+there are no populations in the zone id: 9
+there are no populations in the zone id: 8
+there are no populations in the zone id: 10
+there are no populations in the zone id: 14
+there are no populations in the zone id: 13
+there are no populations in the zone id: 2
+there are no populations in the zone id: 15
+there are no populations in the zone id: 1
+there are no populations in the zone id: 16
+there are no populations in the zone id: 17
+there are no populations in the zone id: 12
+there are no populations in the zone id: 11
+there are no populations in the zone id: 3
+there are no populations in the zone id: 4
+there are no populations in the zone id: 5
+there are no populations in the zone id: 6
+there are no populations in the zone id: 7
+there are no populations in the zone id: 47
+there are no populations in the zone id: 48
+there are no populations in the zone id: 49
+there are no populations in the zone id: 18
+there are no populations in the zone id: 19
+there are no populations in the zone id: 20
+there are no populations in the zone id: 21
+there are no populations in the zone id: 24
+there are no populations in the zone id: 50
+there are no populations in the zone id: 52
+there are no populations in the zone id: 53
+there are no populations in the zone id: 54
+there are no populations in the zone id: 55
+{Unable to perform assignment because the left and right sides have a different number of elements.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('wp2_final_v2', '/Users/Roberto/Desktop/DataProductionMatlab/Goktekin/wp2_final_v2.m', 401)" style="font-weight:bold">wp2_final_v2</a> (<a href="matlab: opentoline('/Users/Roberto/Desktop/DataProductionMatlab/Goktekin/wp2_final_v2.m',401,0)">line 401</a>)
+    income_type (i) = TV0_data_household([TV0_data_household(:).hhID].'== temp_hhid).income_numb; % income type of household
+} 
+opentoline('/Users/Roberto/Desktop/DataProductionMatlab/Goktekin/wp2_final_v2.m',401,0)
+opentoline('/Users/Roberto/Desktop/DataProductionMatlab/Goktekin/wp2_final_v2.m',401,0)
+TV0_data_household([TV0_data_household(:).hhID].'== temp_hhid).income_numb
+
+ans =
+
+     []
+
+if system_dependent('IsDebugMode')==1, dbquit; end
+cldear
+{Unrecognized function or variable 'cldear'.
+} 
+clear
+wp2_final_v2
+there are no populations in the zone id: 22
+there are no populations in the zone id: 39
+there are no populations in the zone id: 31
+there are no populations in the zone id: 27
+there are no populations in the zone id: 28
+there are no populations in the zone id: 29
+there are no populations in the zone id: 44
+there are no populations in the zone id: 43
+there are no populations in the zone id: 41
+there are no populations in the zone id: 42
+there are no populations in the zone id: 30
+there are no populations in the zone id: 46
+there are no populations in the zone id: 40
+there are no populations in the zone id: 45
+there are no populations in the zone id: 9
+there are no populations in the zone id: 8
+there are no populations in the zone id: 10
+there are no populations in the zone id: 14
+there are no populations in the zone id: 13
+there are no populations in the zone id: 2
+there are no populations in the zone id: 15
+there are no populations in the zone id: 1
+there are no populations in the zone id: 16
+there are no populations in the zone id: 17
+there are no populations in the zone id: 12
+there are no populations in the zone id: 11
+there are no populations in the zone id: 3
+there are no populations in the zone id: 4
+there are no populations in the zone id: 5
+there are no populations in the zone id: 6
+there are no populations in the zone id: 7
+there are no populations in the zone id: 47
+there are no populations in the zone id: 48
+there are no populations in the zone id: 49
+there are no populations in the zone id: 18
+there are no populations in the zone id: 19
+there are no populations in the zone id: 20
+there are no populations in the zone id: 21
+there are no populations in the zone id: 24
+there are no populations in the zone id: 50
+there are no populations in the zone id: 52
+there are no populations in the zone id: 53
+there are no populations in the zone id: 54
+there are no populations in the zone id: 55

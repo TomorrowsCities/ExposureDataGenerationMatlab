@@ -8,15 +8,23 @@
 % 
 
 %% Clear out the Workspace and Command Window
-clear; clc;
+% clear; clc;
 
 %% Input File Folder 
 input_file_folder = pwd;
 
-% Read Landuse File
-[dummyCell, dummyNames] = dbfread( '/Users/Roberto/Desktop/LandUsePlan_FG_E.dbf');
-TV0_data_landuse = cell2table(dummyCell);
-TV0_data_landuse.Properties.VariableNames = dummyNames;
+% % Read Landuse File
+% [dummyCell, dummyNames] = dbfread( '/Users/Roberto/Desktop/LandUsePlan_FG_E.dbf');
+% TV0_data_landuse = cell2table(dummyCell);
+% TV0_data_landuse.Properties.VariableNames = dummyNames;
+% 
+% % fix missing zoneIDs
+% lastZoneID = max(unique(TV0_data_landuse.zoneID));
+% TV0_data_landuse.zoneID(isnan(TV0_data_landuse.zoneID)) = ...
+%     lastZoneID+1 : lastZoneID + sum(isnan(TV0_data_landuse.zoneID));
+
+
+
 
 % TV0_data_landuse2 = readtable( [ input_file_folder2 'LANDUSE_S0\LANDUSE_S0.dbf'], "FileType","spreadsheet");
 
@@ -26,7 +34,7 @@ TV0_data_landuse.Properties.VariableNames = dummyNames;
 % lowincome_indx=strcmp(TV0_data_landuse.type,'lowIncome');
 % income_mat = {'lowIncomeA','lowincomeB'};
 % assigned_vals = cell(sum(lowincome_indx),1);
-% for i=1:sum(lowincome_indx)    
+% for i=1:sum(lowincome_indx)
 %     if i> (sum(lowincome_indx)/2)
 %         assigned_vals(i)={'lowIncomeA'};
 %     else
@@ -34,9 +42,41 @@ TV0_data_landuse.Properties.VariableNames = dummyNames;
 %     end
 % end
 % new_idx=randperm(sum(lowincome_indx));
-% TV0_data_landuse.type(lowincome_indx) =assigned_vals(new_idx); 
+% TV0_data_landuse.type(lowincome_indx) =assigned_vals(new_idx);
 
-avg_income_types = {'lowIncomeA','lowIncomeB','midIncome','highIncome'};
+allowed_income_types = {'lowIncomeA','lowIncomeB','midIncome','highIncome'};
+% fix upper case of avg income
+for z = 1 : size(TV0_data_landuse,1)
+    if any(strcmpi(allowed_income_types, TV0_data_landuse.avgIncome{z}))
+        TV0_data_landuse.avgIncome{z}(1) = lower(TV0_data_landuse.avgIncome{z}(1));
+    end
+end
+
+
+avg_income_types = unique(TV0_data_landuse.avgIncome);
+for k = 1 : numel(allowed_income_types)
+    if ~any(strcmp(allowed_income_types, avg_income_types{k}))
+        avg_income_types(k) = [];
+    end
+end
+
+% make it a row (just in case)
+avg_income_types = avg_income_types';
+
+
+% % Avg Income Dist. Tables (Table-2)
+% % Households  LIA   LIB  MI   HI
+dist_avgIncome.lowIncomeA  = [0.60 0.30 0.10 0   ];
+dist_avgIncome.lowIncomeB  = [0.35 0.50 0.15 0   ];
+dist_avgIncome.midIncome   = [0.05 0.10 0.80 0.05];
+dist_avgIncome.highIncome  = [0    0    0.15 0.85];
+
+
+dist_table2={[0.60 0.30 0.10 0   ];...       % LIA (Zone)
+             [0.35 0.50 0.15 0   ];...       % LIB (Zone)
+             [0.05 0.10 0.80 0.05];...       % MI  (Zone)
+             [0    0    0.15 0.85]};         % HI  (Zone)
+
 %% All Steps 
 
 % -------------------------------------------------------------------------
@@ -55,8 +95,12 @@ avg_income_types = {'lowIncomeA','lowIncomeB','midIncome','highIncome'};
 % For All Zone-IDs
 area = TV0_data_landuse.area;   % Area should be known
 
-nPeople = round(TV0_data_landuse.densityCap.*area - TV0_data_landuse.population);
-nPeople(nPeople<0)=0; % Negative populations become 0;
+warning('FIX ME')
+nPeople = TV0_data_landuse.population;
+nPeople(isnan(nPeople)) = 0;
+
+% nPeople = round(TV0_data_landuse.densityCap.*area - TV0_data_landuse.population);
+% nPeople(nPeople<0)=0; % Negative populations become 0;
 
 % -------------------------------------------------------------------------
 % STEP2 Identify the number of households
@@ -118,12 +162,7 @@ end
 % STEP4 Identify and assign income type of the households
 % -------------------------------------------------------------------------
 
-% % Avg Income Dist. Tables (Table-2)
-% % Households  LIA   LIB  MI   HI
-dist_table2={[0.60 0.30 0.10 0   ];...       % LIA (Zone)
-             [0.35 0.50 0.15 0   ];...       % LIB (Zone)
-             [0.05 0.10 0.80 0.05];...       % MI  (Zone)
-             [0    0    0.15 0.85]};         % HI  (Zone)
+
 
 
 TV0_data_household(1).income_numb = []; % Initialize ( keep it as a number 1-lowIncomeA, 2-lowIncomeB, 3-midIncome, 4-highIncome
@@ -133,7 +172,7 @@ for i = 1: length(avg_income_types)
     income_idx=strcmp([TV0_data_household(:).zoneType],avg_income_types{i});
     income_idx = income_idx(:); % force it to be a column vector
     % Find Total of every different income type
-    income_of_households=dist_table2{i}*sum(income_idx);
+    income_of_households = dist_avgIncome.(avg_income_types{i})*sum(income_idx);
     % Find the cumulative sum  
     cumsum_household_num = round(cumsum(income_of_households));
     % Make it a column vector
@@ -172,12 +211,12 @@ end
 
 % Gender Dist. Table (Table-3)
 %            F   M 
-dist_table3=[0.5 0.5];
+dist_avgIncome=[0.5 0.5];
 
 TV0_data_individual(1).gender = []; % Initialize
 n_total_people = size(TV0_data_individual,1);
 % Find Total number of individuals of different gender
-gender_of_individuals=dist_table3*n_total_people;
+gender_of_individuals=dist_avgIncome*n_total_people;
 % Find the cumulative sum  
 cumsum_gender_num = round(cumsum(gender_of_individuals));
 % Make it a column vector
@@ -357,6 +396,7 @@ indivID_ofstudents = find(age_indx_total); % individual Id of students
 hhID_ofstudents = [TV0_data_individual(age_indx_total).hhID].'; % household Id of students
 head_eduattstat = zeros(size(hhID_ofstudents,1),1); % Initialize
 income_type = zeros(size(hhID_ofstudents,1),1); % Initialize
+
 for i=1:length(hhID_ofstudents)    
     temp_hhid = hhID_ofstudents(i); % temporary household id of students
     hh_id_index = [TV0_data_individual(:).hhID].' == temp_hhid; % Individual indx of temporary household id 
@@ -445,7 +485,7 @@ fpt_area = {[32 66];... % lowIncomeA
 % 11- {'RESIDENTIAL (LOW DENSITY)'       }
 % 12- {'RESIDENTIAL (MODERATE DENSITY)'  }
 
-land_use_types = unique(TV0_data_landuse.LuF);
+land_use_types = unique(TV0_data_landuse.LUf);
 
 % Number of storeys
 % LR - 1-4  storeys	Low Rise	
@@ -497,7 +537,7 @@ TV0_data_building = struct('zoneID',[],'bldID',[],'nHouse',[],'residents',[],...
 bld_numb = 0;
 for zone_idx = 1: size(TV0_data_landuse,1) 
     zoneid = TV0_data_landuse.zoneID(zone_idx);
-    lut = TV0_data_landuse.LuF(zone_idx);
+    lut = TV0_data_landuse.LUf(zone_idx);
     avg_income = TV0_data_landuse.avgIncome(zone_idx);
     lut_number = find(strcmp(land_use_types,lut));
     income_number = find(strcmp(avg_income_types,avg_income));
@@ -727,7 +767,7 @@ generated_buildings_ind = max_ind_buildings - sum(temp_numb_ind) ;
 
 % Lut number of Com buildings 
 table9 = cell2mat(dist_table9);
-Com_Table = table9(:,3) .* double(table9(:,1)==0);
+Com_Table = table9(1:length(land_use_types,3) .* double(table9(1:length(land_use_types,1)==0);
 Com_prob = Com_Table/sum(Com_Table);
 com_buildings_new= Com_prob*generated_buildings_com;
 com_buildings_total = com_buildings_new + temp_numb_com;
@@ -742,7 +782,7 @@ com_buildings_lut_numb = column_vector(sample_idx);
 
 % Lut number of Ind Buildings
 table9 = cell2mat(dist_table9);
-Ind_Table = table9(:,2) .* double(table9(:,1)==0);
+Ind_Table = table9(1:length(land_use_types,2) .* double(table9(1:length(land_use_types,1)==0);
 Ind_prob = Ind_Table/sum(Ind_Table);
 ind_buildings_new= Ind_prob*generated_buildings_ind;
 ind_buildings_total = ind_buildings_new + temp_numb_ind;
@@ -885,7 +925,7 @@ zoneid = zeros(size(TV0_data_landuse,1),1);
 lut_number = zeros(size(TV0_data_landuse,1),1);
 for zone_idx = 1: size(TV0_data_landuse,1) 
     zoneid(zone_idx) = TV0_data_landuse.zoneID(zone_idx);
-    lut = TV0_data_landuse.LuF(zone_idx);
+    lut = TV0_data_landuse.LUf(zone_idx);
     if any(strcmp(land_use_types,lut))
         lut_number(zone_idx) = find(strcmp(land_use_types,lut));
     else
@@ -922,8 +962,8 @@ end
 % 1 hospital per 25.000 individuals
 
 total_individuals = sum([TV0_data_building(:).residents].');
-numb_school =  round(total_individuals/10000); % School specialFac=1
-numb_hospital = round(total_individuals/25000); % Hospital specialFac=2
+numb_school =  max(round(total_individuals/10000),1); % School specialFac=1
+numb_hospital = max(round(total_individuals/25000),1); % Hospital specialFac=2
 
 % -------------------------------------------------------------------------
 % STEP20 Generate expStr for schools and hospitals
