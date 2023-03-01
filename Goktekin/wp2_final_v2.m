@@ -11,10 +11,10 @@
 clear; clc;
 
 %% Input File Folder 
-input_file_folder = 'C:\Kandilli Projects\tomorrow_cities\RandomAssignments\Codes\';
+input_file_folder = '/Users/eminyahyamentese/Documents/KathmanduDEMO/FG_C_Youth/';
 
 % Read Landuse File
-TV0_data_landuse = readtable( [ input_file_folder 'polygonsTV50.dbf'], "FileType","spreadsheet");
+TV0_data_landuse = readtable( [ input_file_folder 'LandUse_FG_C.xlsx'], "FileType","spreadsheet");
 % TV0_data_landuse2 = readtable( [ input_file_folder2 'LANDUSE_S0\LANDUSE_S0.dbf'], "FileType","spreadsheet");
 
 % Preprocessing on land use data
@@ -52,7 +52,7 @@ avg_income_types = {'lowIncomeA','lowIncomeB','midIncome','highIncome'};
 % For All Zone-IDs
 area = TV0_data_landuse.area;   % Area should be known
 
-nPeople = round(TV0_data_landuse.densityCap.*area - TV0_data_landuse.population);
+nPeople = round(TV0_data_landuse.densityCap.* area - TV0_data_landuse.population);
 nPeople(nPeople<0)=0; % Negative populations become 0;
 
 % -------------------------------------------------------------------------
@@ -669,7 +669,7 @@ total_individuals = sum([TV0_data_building(:).residents].');
 
 %               Res Ind Com ResCom
 dist_table9 = {[1.0 0.0 0.0 0.0];... % LUT1 'AGRICULTURE'
-               [0.0 0.0 1.0 0.0];... % LUT2 'CITY CENTER' 
+               [1.0 0.0 0.0 0.0];... % LUT2 'CITY CENTER' 
                [0.0 0.0 1.0 0.0];... % LUT3 'COMMERCIAL AND RESIDENTIAL'
                [0.6 0.0 0.3 0.1];... % LUT4 'HISTORICAL PRESERVATION AREA'
                [0.0 1.0 0.0 0.0];... % LUT5 'INDUSTRY'
